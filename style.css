@@ -1,0 +1,414 @@
+/* Importing Fonts: Pacifico (Script) and Nunito (Playful/Clean) */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&display=swap');
+
+/* --- 1. GENERAL STYLING & BACKGROUND ANIMATION --- */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fce4ec; /* Light Pink */
+    color: #4a4a4a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container {
+    max-width: 850px;
+    width: 90%;
+    margin: 30px auto;
+    padding: 50px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    z-index: 5; /* Ensure content is on top of confetti */
+}
+
+/* Confetti Background Animation */
+.confetti-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+    pointer-events: none;
+    /* Create multiple shadow layers for falling dots */
+    box-shadow: 
+        0 0 0 50vw #fcf4c4, /* Yellow dot */
+        0 0 0 100vw #c3f7d1, /* Green dot */
+        0 0 0 150vw #ffb3b3; /* Red dot */
+    animation: confettiFall 20s linear infinite;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+
+/* --- 2. HEADER AND FLOATING BALLOON --- */
+header {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.animated-header {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5em;
+    color: deeppink; /* Purple accent */
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    animation: textPop 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    opacity: 0;
+}
+
+@keyframes textPop {
+    0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    70% { opacity: 1; transform: scale(1.05) rotate(2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.floating-balloon {
+    position: absolute;
+    top: -30px;
+    right: 50px;
+    font-size: 3em;
+    animation: floatUpDown 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes floatUpDown {
+    0% { transform: translateY(0px) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(-5deg); }
+}
+
+
+/* --- 3. IMAGE SECTION ANIMATION --- */
+.image-section {
+    margin: 30px 0;
+}
+
+.photo-frame {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 50%; /* Circle frame */
+    border: 8px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    /* Background Gradient for Animated Border Effect */
+    background-image: linear-gradient(#ffffff, #ffffff), 
+                      radial-gradient(circle at top left, #ffccbc, #e91e63);
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    animation: gradientBorder 5s linear infinite alternate;
+}
+
+@keyframes gradientBorder {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* --- NEW IMAGE SECTION STYLING (Replacing ALL previous image-section styles) --- */
+.image-section {
+    margin: 40px 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 400px; /* Ensure enough space for animations */
+}
+
+.star-photo-gallery {
+    background: linear-gradient(135deg, #ffe0f6, #c3f7d1); /* Soft gradient background for gallery */
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    animation: galleryFadeIn 1.5s ease-out forwards 1.8s;
+    opacity: 0;
+    transform: translateY(30px);
+    position: relative;
+    z-index: 7; /* Higher z-index to be prominent */
+}
+
+@keyframes galleryFadeIn {
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.star-orb-wrapper {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+    animation: bounceAndFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes bounceAndFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(-5deg); }
+}
+
+.star-orb {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ffc0cb, #f0e68c); /* Pink to Yellow gradient for orb */
+    border-radius: 50%; /* Circular orb */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 192, 203, 0.7); /* Soft pink glow */
+    border: 5px solid #fff; /* White border for crispness */
+    position: relative;
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+.star-orb:hover {
+    transform: scale(1.08) rotate(3deg); /* Enlarge and tilt on hover */
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.9); /* Stronger glow on hover */
+}
+
+.star-image {
+    width: 90%; /* Image slightly smaller than orb for border effect */
+    height: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.1); /* Slightly more vibrant */
+}
+
+.orb-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 15% 15%, rgba(255,255,255,0.7), transparent 40%);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: pulseShine 3s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes pulseShine {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Floating Stars around the Orb */
+.floating-star {
+    position: absolute;
+    font-size: 2em; /* Size of emojis */
+    animation: floatAround 8s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0; /* Start hidden */
+}
+
+.star-1 {
+    top: -20px;
+    left: 20px;
+    animation-delay: 0.5s;
+    animation-duration: 7s;
+}
+.star-2 {
+    bottom: -10px;
+    right: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 9s;
+}
+.star-3 {
+    top: 50%;
+    left: -30px;
+    transform: translateY(-50%);
+    animation-delay: 2.5s;
+    animation-duration: 6s;
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translate(20px, -20px) scale(1); opacity: 1; }
+    80% { transform: translate(-20px, 10px) scale(0.9); opacity: 1; }
+    100% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+}
+
+.gallery-message {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6em;
+    color: #880e4f; /* Darker pink */
+    margin-top: 15px;
+    animation: textPop 1s ease-out forwards 2.5s;
+    opacity: 0;
+}
+
+.memory-tag {
+    font-size: 0.9em;
+    color: #9c27b0;
+    background-color: #f3e5f5; /* Light purple background for tag */
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    animation: tagFadeIn 1s ease-out forwards 2.8s;
+    opacity: 0;
+}
+
+@keyframes tagFadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Caption (existing, just adjusting margin for new layout) */
+.caption {
+    margin-top: 25px; /* Adjust margin from the new gallery */
+    font-style: italic;
+    color: #795548;
+    animation: fadeIn 1s ease-out forwards 3s;
+    opacity: 0;
+}
+/* Previous fadeIn keyframe should still be defined */
+/* @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } } */
+
+
+/* --- 4. WISH CARD AND INTERACTIVE ELEMENTS --- */
+.wish-card {
+    background-color: #fffde7; /* Yellowish Cream */
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 2px dashed #ff7043;
+    text-align: left;
+    line-height: 1.7;
+    animation: fadeInSlideUp 1s ease-out forwards 1.2s;
+    opacity: 0; 
+    transform: translateY(30px);
+    box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
+}
+
+@keyframes fadeInSlideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.wish-card h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ff7043;
+    font-size: 2.2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.message {
+    font-size: 1.1em;
+    color: #6a0dad; /* Purple text for a fun pop */
+}
+
+/* Button Group Styling */
+.button-group {
+    margin: 25px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.secret-button, .cute-reaction-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.3s, background-color 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Secret Button Animation */
+.secret-button {
+    background-color: #ffd1dc; /* Soft Pink */
+    color: #e91e63;
+}
+
+.secret-button:hover {
+    background-color: #ffc0cb;
+    transform: translateY(-5px) scale(1.05);
+}
+
+.secret-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e91e63; /* Bright Pink overlay */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    font-size: 0.9em;
+    font-weight: 400;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.secret-button:hover .secret-text {
+    opacity: 1; /* Show secret message on hover */
+}
+
+/* Cute Reaction Button Animation (JS needed for full effect, but CSS hover added) */
+.cute-reaction-button {
+    background-color: #c3f7d1; /* Soft Green */
+    color: #4CAF50;
+}
+
+.cute-reaction-button:hover {
+    background-color: #a8f0b7;
+    transform: scale(1.1); /* Jiggle effect */
+    animation: jiggle 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes jiggle {
+    from { transform: scale(1.1) rotate(-3deg); }
+    to { transform: scale(1.1) rotate(3deg); }
+}
+
+/* Fun Fact Styling */
+.fun-fact {
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #ffeeff; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 192, 203, 0.5); /* Pink Glow */
+    animation: glowPulse 3s infinite alternate;
+    font-weight: 700;
+    color: #d81b60;
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 10px rgba(255, 192, 203, 0.5); }
+    100% { box-shadow: 0 0 20px rgba(255, 100, 150, 0.8); }
+}
+
+/* Footer Styling */
+footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ffccbc;
+    color: #9c27b0;
+    font-size: 0.9em;
+}
